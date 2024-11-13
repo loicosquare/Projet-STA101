@@ -1,0 +1,14 @@
+name: declaration-automation-base-on-R
+title:
+username:
+account: armel-sanou
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8055013
+bundleId: 7315901
+url: https://armel-sanou.shinyapps.io/declaration-automation-base-on-R/
+when: 1686139717.0299
+lastSyncTime: 1686139717.02991
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|output.pdf|README.md

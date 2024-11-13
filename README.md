@@ -1,2 +1,1 @@
-# Projet-STA101
-Analyse de données avec R.
+# This project has a goal to automatize all procedures for project into dehon group.
