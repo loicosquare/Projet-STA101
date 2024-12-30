@@ -203,13 +203,91 @@ ui <- dashboardPage(skin="green",
                                      ),
                                      
                                      fluidRow(
-                                      column(6, 
-                                       box(
-                                        width=12,
-                                           plotOutput("hist_city_dev")  %>% withSpinner(type = 4, color = "blue"),
-                                           footer = "L’indice de développement de la ville (city_development_index) montre une répartition assez concentrée autour des valeurs élevées, surtout entre 0,8 et 0,9, avec un pic marqué autour de 0,92. Cela indique que la majorité des candidats vivent dans des villes ayant un indice de développement relativement élevé.", collapsible = T
+                                      column(12,
+                                        column(6, 
+                                          box(
+                                            width=12,
+                                              plotOutput("hist_city_dev")  %>% withSpinner(type = 4, color = "blue"),
+                                              footer = "L’indice de développement de la ville (city_development_index) montre une répartition assez concentrée autour des valeurs élevées, surtout entre 0,8 et 0,9, avec un pic marqué autour de 0,92. Cela indique que la majorité des candidats vivent dans des villes ayant un indice de développement relativement élevé.", collapsible = T
+                                            )
+                                          ),
+                                          column(6,
+                                          box(
+                                            width=12,
+                                            plotOutput("box_city_dev") %>% withSpinner(type = 7, color = "pink"),
+                                            footer = "Le boxplot montre une répartition majoritairement élevée avec quelques valeurs atypiques (outliers) en dessous de 0,6. Cela confirme que les candidats viennent généralement de zones bien développées.", collapsible = T
+                                          )
                                         )
                                       ),
+                                      column(12,
+                                        column(6, 
+                                          box(
+                                            width=12,
+                                              plotOutput("hist_age")  %>% withSpinner(type = 4, color = "blue"),
+                                              footer = "
+                                                L'histogramme nous donne une vue d'ensemble de la distribution des âges dans l'échantillon. On peut observer que :
+
+                                                La distribution est asymétrique à droite : la majorité des individus sont plus jeunes et la queue de distribution s'étend vers les âges plus élevés. Cela signifie qu'il y a plus de jeunes individus dans l'échantillon.
+                                                Le pic de la distribution se situe autour de 50 ans : c'est l'âge le plus fréquent dans l'échantillon.
+                                                Les âges sont compris entre environ 20 et 70 ans : cela donne une idée de l'étendue de l'échantillon en termes d'âge.", collapsible = T
+                                            )
+                                          ),
+                                          column(6,
+                                          box(
+                                            width=12,
+                                            plotOutput("box_age") %>% withSpinner(type = 7, color = "pink"),
+                                            footer = "
+                                              Le boxplot nous fournit des informations plus précises sur les quantiles de la distribution, notamment :
+
+                                              - La médiane se situe autour de 41 ans : la moitié des individus ont moins de 41 ans et l'autre moitié en a plus.
+                                              - Les quartiles : 25% des individus ont moins de 30 ans (premier quartile) et 75% ont moins de 52 ans (troisième quartile).
+                                              Les valeurs extrêmes : il semble y avoir un outlier (valeur aberrante) vers la droite, c'est-à-dire une personne beaucoup plus âgée que les autres.
+                                            ", collapsible = T
+                                          )
+                                        ),
+                                        column(12,
+                                          p("En combinant l information des deux graphiques, on peut affirmer que :
+                                            La majorité des individus ont entre 30 et 50 ans.
+                                            Il y a une dispersion assez importante des âges, avec une queue de distribution à droite.
+                                            La présence d'un outlier suggère qu'il pourrait y avoir des sous-groupes d'âges différents dans l'échantillon."
+                                          )
+                                        )
+                                      ),
+                                      column(12,
+                                        column(6, 
+                                          box(
+                                            width=12,
+                                              plotOutput("hist_hours_per_week")  %>% withSpinner(type = 4, color = "blue"),
+                                              footer = "
+                                                L'histogramme nous donne une vision d'ensemble de la distribution du nombre d'heures travaillées par semaine dans l'échantillon. On peut observer que :
+
+                                                La distribution est asymétrique à droite : la majorité des individus travaillent moins d'heures et la queue de distribution s'étend vers les nombres d'heures plus élevés. Cela signifie qu'il y a plus de personnes travaillant un nombre d'heures faible ou moyen dans l'échantillon.
+                                                Le pic de la distribution se situe autour de 40 heures : c'est le nombre d'heures le plus fréquent dans l'échantillon.
+                                                Les nombres d'heures travaillées sont compris entre environ 20 et 100 heures : cela donne une idée de l'étendue de l'échantillon en termes de temps de travail.
+                                              ", collapsible = T
+                                            )
+                                          ),
+                                          column(6,
+                                          box(
+                                            width=12,
+                                            plotOutput("box_hours_per_week") %>% withSpinner(type = 7, color = "pink"),
+                                            footer = "
+                                              Le boxplot nous fournit des informations plus précises sur les quantiles de la distribution, notamment :
+
+                                              La médiane se situe autour de 40 heures : la moitié des individus travaillent moins de 40 heures par semaine et l'autre moitié en travaille plus.
+                                              Les quartiles : 25% des individus travaillent moins de 30 heures (premier quartile) et 75% travaillent moins de 50 heures (troisième quartile).
+                                              Les valeurs extrêmes : il semble y avoir plusieurs valeurs aberrantes (outliers) vers la droite, c'est-à-dire des personnes travaillant beaucoup plus d'heures que les autres.
+                                            ", collapsible = T
+                                          )
+                                        ),
+                                        column(12,
+                                          p("En combinant l information des deux graphiques, on peut affirmer que :
+                                            La majorité des individus travaillent entre 30 et 50 heures par semaine.
+                                            Il y a une dispersion assez importante du nombre d heures travaillées, avec une queue de distribution à droite.
+                                            La présence de plusieurs outliers suggère qu il pourrait y avoir des sous-groupes d individus travaillant des nombres d heures très différents."
+                                          )
+                                        )
+                                        ),
                                       column(6,
                                        box(
                                          width=12,
@@ -227,8 +305,8 @@ ui <- dashboardPage(skin="green",
                                       column(6,
                                        box(
                                          width=12,
-                                         plotOutput("box_city_dev") %>% withSpinner(type = 7, color = "pink"),
-                                         footer = "Le boxplot montre une répartition majoritairement élevée avec quelques valeurs atypiques (outliers) en dessous de 0,6. Cela confirme que les candidats viennent généralement de zones bien développées.", collapsible = T
+                                         plotOutput("box_training_hours") ,
+                                         footer = "Le boxplot met en évidence plusieurs valeurs atypiques (outliers) au-dessus de 100 heures, confirmant la présence de quelques candidats ayant suivi un grand nombre d'heures de formation, contrairement à la majorité.", collapsible = T
                                        )
                                       ),
                                       column(6,
@@ -236,13 +314,6 @@ ui <- dashboardPage(skin="green",
                                          width=12,
                                          plotOutput("box_experience") %>% withSpinner(type = 8, color = "#333333"),
                                          footer = "Le boxplot de l'expérience montre que la majorité des candidats a entre 6 et 18 ans d'expérience. Les valeurs entre 0 et 5 ans ou supérieures à 18 ans pourraient être moins fréquentes ou représenter des cas spécifiques.", collapsible = T
-                                       )
-                                      ),
-                                      column(6,
-                                       box(
-                                         width=12,
-                                         plotOutput("box_training_hours") ,
-                                         footer = "Le boxplot met en évidence plusieurs valeurs atypiques (outliers) au-dessus de 100 heures, confirmant la présence de quelques candidats ayant suivi un grand nombre d'heures de formation, contrairement à la majorité.", collapsible = T
                                        )
                                       )
                                      ),
@@ -413,7 +484,21 @@ ui <- dashboardPage(skin="green",
                                            collapsible = T)
                                      ),
                                      h3("Quantitatif vs Qualitatif"),
-                                     fluidRow(box(width = 12, 
+                                     fluidRow(box(width = 12,
+                                     column(6,
+                                        box(
+                                          width=12,
+                                          plotOutput("plot1") %>% withSpinner(type = 5, color = "#FFD700"),
+                                          footer = "", collapsible = T
+                                        )
+                                       ),
+                                      column(6,
+                                        box(
+                                          width=12,
+                                          plotOutput("plot2") %>% withSpinner(type = 5, color = "#FFD700"),
+                                          footer = "", collapsible = T
+                                        )
+                                       ),
                                        column(6,
                                               
                                               box(
@@ -534,61 +619,6 @@ ui <- dashboardPage(skin="green",
                                                           class = "btn btn-sm btn-danger")
                                               )
                                            )
-                                        ),
-                                        column(2,
-                                               box(width = 12,title="Normalisation", column(12,
-                                              # Bouton pour gérer les valeurs manquantes
-                                              actionButton("normalize" ,"Normaliser", icon("filter"),
-                                                           class = "btn btn-sm btn-warning"),
-                                              
-                                              actionButton("cancel" ,"Cancel", icon("sync"),
-                                                           class = "btn btn-sm btn-default")
-                                          )
-                                         )
-                                        ),
-                                        column(2,
-                                               box(width = 12,title="Dummification",
-                                              #Liste des colonnes du dataset
-                                              selectizeInput(inputId = "columns_select",
-                                                             label = "Choose column",
-                                                             choices = NULL, 
-                                                             multiple = TRUE,
-                                                             selected = NULL),
-                                              
-                                              # Bouton pour la dummification
-                                              actionButton("dummify" ,"Dummify", icon("sync"),
-                                                           class = "btn btn-sm btn-success"),
-                                              # Bouton pour gérer les valeurs manquantes
-                                              actionButton("remove_all" ,"Remove All", icon("trash"),
-                                                           style = "color: #FFFFFF; background-color: #CA001B; border_color: #CA001B"),
-                                              
-                                              # Bouton pour gérer les valeurs manquantes
-                                              #actionButton("add_all" ,"Add All", icon("minus"),
-                                              #style = "color: #FFFFFF; background-color: #CA001B; border_color: #CA001B"),
-                                              
-                                            )
-                                          ),
-                                          column(4,  
-                                            box(width = 12,title="Déséquilibre des classes", column(12,
-                                                                                                 
-                                               sliderInput("balance_level", "Régler le problème de déséquilibre à combien de %:",
-                                                           min = 0, max = 100,
-                                                           value = 0, step = 5,
-                                                           animate = animationOptions(interval = 300, loop = TRUE)),
-                                               
-                                               # Bouton pour gérer les valeurs manquantes
-                                               actionButton("balance_add" ,"Ajouter Classe Minoritaire", icon("plus"),
-                                                            class = "btn btn-sm btn-success"),
-                                               
-                                               # Bouton pour gérer les valeurs manquantes
-                                               actionButton("balance_delete" ,"Diminuer Classe Majoritaire", icon("minus"),
-                                                            class = "btn btn-sm btn-danger"),
-                                               
-                                               
-                                               actionButton("resetEquilibre" ,"Reset", icon("sync"),
-                                               class = "btn btn-sm btn-danger")
-                                            )
-                                          )
                                         ),
                                       #-----------------------------------------------#
                                       #--------------FIN AJOUT BOUTTONS A&R-----------#

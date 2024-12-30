@@ -38,6 +38,10 @@ server<-function(input,output,session){
     
     if(stringr::str_ends(input$file1$datapath, "csv")) {
       hr_data <<- read.csv(input$file1$datapath,header = TRUE, sep=",", stringsAsFactors = FALSE, na.strings = c("","NA"))
+
+      hr_data$age <<- hr_data[!is.na(as.numeric(hr_data$age)), "age"]
+      hr_data$hours_per_week <<- hr_data[!is.na(as.numeric(hr_data$hours_per_week)), "hours_per_week"]
+
       
       applyAnalyseExoloratoire(hr_data, session, output)
       applyAnalyseDsitribution()
@@ -227,7 +231,7 @@ server<-function(input,output,session){
       theme_minimal() +
       labs(title = "Répartition des valeurs manquantes par colonne", x = "Colonnes", y = "Nombre de valeurs manquantes") +
       scale_fill_manual(values = c("grey", "red"), name = "Valeurs Manquantes", labels = c("Non", "Oui"))
-    })
+    })    
   
   }
     

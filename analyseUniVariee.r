@@ -18,9 +18,13 @@
     # Histogramme de la variable 'experience'
     output$hist_experience <- renderPlot({ hist(data_hr$experience, main="Expérience", xlab="Années", col="lightgreen", breaks=20) })
     output$hist_training_hours <- renderPlot({ hist(data_hr$training_hours, main="Heures de Formation", xlab="Heures", col="lightcoral", breaks=20) })
+    output$hist_age <- renderPlot({ hist(data_hr$age, main="Age", xlab="Age", col="lightgreen", breaks=20) })
+    output$hist_hours_per_week <- renderPlot({ hist(data_hr$hours_per_week, main="Hours_per_week", xlab="Heures", col="lightgreen", breaks=20) })
     output$box_city_dev <- renderPlot({ boxplot(data_hr$city_development_index, main="Boxplot de City Development Index", col="lightblue", horizontal=TRUE) })
     output$box_experience <- renderPlot({ boxplot(data_hr$experience, main="Boxplot de l'expérience", col="lightgreen", horizontal=TRUE) })
     output$box_training_hours <- renderPlot({ boxplot(data_hr$training_hours, main="Boxplot des heures de formation", col="lightcoral", horizontal=TRUE) })
+    output$box_age <- renderPlot({ boxplot(data_hr$age, main="Boxplot de Age", col="lightblue", horizontal=TRUE) })
+    output$box_hours_per_week <- renderPlot({ boxplot(data_hr$hours_per_week, main="Boxplot de Hours_per_week", col="lightblue", horizontal=TRUE) })
     
     # Analyse univariée - Variables qualitatives
     output$bar_gender <- renderPlot({ barplot(table(data_hr$gender), main="Genre", col="lightblue") })
@@ -113,8 +117,25 @@
     output$chisq_test <- renderPrint({
       chisq.test(table(data_hr$gender, data_hr$education_level), simulate.p.value = TRUE)
     })
-  
-  }
+
+    #nuages de points avec une droite de régression ajustée
+
+    output$plot1 <- renderPlot({
+      ggplot(data_hr, aes(x = city_development_index, y = experience, color = "red")) +
+        geom_point() +
+        geom_smooth(method = "lm") +
+        scale_color_gradient(low = "red", high = "blue") +
+        labs(x = "Durée de vie moyenne", y = "Réanimations par partie", color = "Variable de couleur")
+    })
+
+    # Figure 9
+    ggplot(data_hr, aes(x = age, y = education_level, color = "blue")) +
+      geom_point() +
+      geom_smooth(method = "lm") +
+      scale_color_gradient(low = "red", high = "blue") +
+      labs(x = "Tueries par partie", y = "Abattages par partie", color = "Variable de couleur")
+    
+    }
   
   ##########################################
   #   ANALYSE UNIVARIEE ET BIVARIEE FIN    #
