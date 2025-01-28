@@ -1,0 +1,13 @@
+name: Projet-STA101
+title: Projet-STA101
+username: loicsanou
+account: loicsanou
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13804141
+bundleId: 9697340
+url: https://loicsanou.shinyapps.io/Projet-STA101/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: output.pdf|Plan_Consolide_Rapport.docx|README.md|stratified_sample_adult.csv|stratified_sample_bdd.csv|WWW/feature.png|data

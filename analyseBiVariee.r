@@ -15,14 +15,14 @@ analyseBivariee <- function(data_hr, output) {
     #   cor(quantitative_vars, use="complete.obs")
     # })
     # output$pairs_plot <- renderPlot({
-    #   quantitative_vars <- select(data_hr, city_development_index, experience, training_hours)
+    #   quantitative_vars <- select(data_hr, city_development_index, experience, training_hours,hours_per_week, age)
     #   pairs(quantitative_vars, main="Relations entre Variables Quantitatives", pch=20, col="blue")
     # })
 
     # Analyse bivariée - Corrélations entre variables quantitatives
     output$cor_matrix <- renderPrint({
         # Sélectionner les colonnes quantitatives
-        quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours)
+        quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours,hours_per_week, age)
 
         # Convertir les colonnes en numérique si nécessaire
         quantitative_vars <- mutate_if(quantitative_vars, is.character, as.numeric)
@@ -32,7 +32,7 @@ analyseBivariee <- function(data_hr, output) {
     })
 
     output$pairs_plot <- renderPlot({
-        quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours)
+        quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours,hours_per_week, age)
         quantitative_vars <- mutate_if(quantitative_vars, is.character, as.numeric)
 
         pairs(quantitative_vars, main = "Relations entre Variables Quantitatives", pch = 20, col = "blue")
@@ -65,7 +65,7 @@ analyseBivariee <- function(data_hr, output) {
 
     # Histogrammes pour les variables quantitatives
     output$histograms <- renderPlot({
-        quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours)
+        quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours, hours_per_week, age)
 
         par(mfrow = c(1, 3)) # Ajuster la disposition des graphiques
         hist(quantitative_vars$city_development_index, main = "City Development Index", xlab = "City Development Index", col = "lightblue")
@@ -78,7 +78,9 @@ analyseBivariee <- function(data_hr, output) {
         anova_results <- list(
             "city_development_index vs gender" = summary(aov(city_development_index ~ gender, data = data_hr)),
             "experience vs relevent_experience" = summary(aov(as.numeric(experience) ~ relevent_experience, data = data_hr)),
-            "training_hours vs education_level" = summary(aov(training_hours ~ education_level, data = data_hr))
+            "training_hours vs education_level" = summary(aov(training_hours ~ education_level, data = data_hr)),
+            "hours_per_week vs marital_status" = summary(aov(hours_per_week ~ marital_status, data = data_hr)),
+            "age vs workclass" = summary(aov(age ~ workclass, data = data_hr))
         )
         anova_results
     })
@@ -87,9 +89,7 @@ analyseBivariee <- function(data_hr, output) {
     # output$chisq_test <- renderPrint({
     # chisq.test(table(data_hr$gender, data_hr$education_level), simulate.p.value = TRUE)
     # })
-    output$chisq_test <- renderPrint({
-        chisq.test(table(data_hr$gender, data_hr$education_level), simulate.p.value = TRUE)
-    })
+
 }
 
 ##########################################

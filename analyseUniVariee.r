@@ -27,6 +27,7 @@
     output$box_hours_per_week <- renderPlot({ boxplot(data_hr$hours_per_week, main="Boxplot de Hours_per_week", col="lightblue", horizontal=TRUE) })
     
     # Analyse univariée - Variables qualitatives
+    output$bar_workclass <- renderPlot({ barplot(table(data_hr$workclass), main="Secteur", col="green") })
     output$bar_gender <- renderPlot({ barplot(table(data_hr$gender), main="Genre", col="lightblue") })
     output$bar_university <- renderPlot({ barplot(table(data_hr$enrolled_university), main="Inscription à l'université", col="lightgreen") })
     output$bar_education <- renderPlot({ barplot(table(data_hr$education_level), main="Niveau d'éducation", col="lightcoral") })
@@ -45,7 +46,7 @@
     # Analyse bivariée - Corrélations entre variables quantitatives
     output$cor_matrix <- renderPrint({ 
       # Sélectionner les colonnes quantitatives
-      quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours)
+      quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours, hours_per_week, age)
       
       # Convertir les colonnes en numérique si nécessaire
       quantitative_vars <- mutate_if(quantitative_vars, is.character, as.numeric)
@@ -55,7 +56,7 @@
     })
     
     output$pairs_plot <- renderPlot({
-      quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours)
+      quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours, hours_per_week, age)
       quantitative_vars <- mutate_if(quantitative_vars, is.character, as.numeric)
       
       pairs(quantitative_vars, main = "Relations entre Variables Quantitatives", pch = 20, col = "blue")
@@ -80,7 +81,7 @@
     
     # Analyse univariée - Variables quantitatives
     output$summary_quant <- renderPrint({
-      quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours)
+      quantitative_vars <- dplyr::select(data_hr, city_development_index, experience, training_hours, age, hours_per_week)
       summary(quantitative_vars)
     })
     
@@ -105,7 +106,9 @@
       anova_results <- list(
         "city_development_index vs gender" = summary(aov(city_development_index ~ gender, data = data_hr)),
         "experience vs relevent_experience" = summary(aov(as.numeric(experience) ~ relevent_experience, data = data_hr)),
-        "training_hours vs education_level" = summary(aov(training_hours ~ education_level, data = data_hr))
+        "training_hours vs education_level" = summary(aov(training_hours ~ education_level, data = data_hr)),
+        "hours_per_week vs marital_status" = summary(aov(hours_per_week ~ marital_status, data = data_hr)),
+        "age vs workclass" = summary(aov(age ~ workclass, data = data_hr))
       )
       anova_results
     })
@@ -114,27 +117,26 @@
     #output$chisq_test <- renderPrint({
       #chisq.test(table(data_hr$gender, data_hr$education_level), simulate.p.value = TRUE)
     #})
-    output$chisq_test <- renderPrint({
-      chisq.test(table(data_hr$gender, data_hr$education_level), simulate.p.value = TRUE)
+    #output$chisq_test <- renderPrint({
+      #chisq.test(table(data_hr$gender, data_hr$education_level), simulate.p.value = TRUE)
+    #})
+
+    output$last_new_job_marital_status <- renderPrint({
+        chisq.test(table(data_hr$last_new_job, data_hr$marital_status), simulate.p.value = TRUE)
     })
 
-    #nuages de points avec une droite de régression ajustée
-
-    output$plot1 <- renderPlot({
-      ggplot(data_hr, aes(x = city_development_index, y = experience, color = "red")) +
-        geom_point() +
-        geom_smooth(method = "lm") +
-        scale_color_gradient(low = "red", high = "blue") +
-        labs(x = "Durée de vie moyenne", y = "Réanimations par partie", color = "Variable de couleur")
+    output$workclass_marital_status <- renderPrint({
+        chisq.test(table(data_hr$workclass, data_hr$marital_status), simulate.p.value = TRUE)
     })
-
-    # Figure 9
-    ggplot(data_hr, aes(x = age, y = education_level, color = "blue")) +
-      geom_point() +
-      geom_smooth(method = "lm") +
-      scale_color_gradient(low = "red", high = "blue") +
-      labs(x = "Tueries par partie", y = "Abattages par partie", color = "Variable de couleur")
     
+    output$relevent_experience_workclass <- renderPrint({
+        chisq.test(table(data_hr$relevent_experience, data_hr$workclass), simulate.p.value = TRUE)
+    })
+
+    output$race_company_type <- renderPrint({
+        chisq.test(table(data_hr$race, data_hr$company_type), simulate.p.value = TRUE)
+    })
+
     }
   
   ##########################################

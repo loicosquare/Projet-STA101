@@ -1,0 +1,133 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r}
+library(tidyverse)
+library(cluster)
+library(factoextra)
+library(FactoMineR)
+library(ggplot2)
+library(dplyr)
+```
+
+1. Préparation des données
+```{r}
+# Chargement des données
+# Supposons que les données soient dans un fichier CSV
+data <- read.csv("data_final.csv")
+
+# Gestion des valeurs manquantes
+data <- data %>%
+  mutate(across(where(is.numeric), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .))) %>%
+  mutate(across(where(is.character), ~ ifelse(is.na(.), "Inconnu", .)))
+
+# Normalisation des variables numériques
+numeric_vars <- data %>%
+  select(where(is.numeric))
+data_scaled <- scale(numeric_vars)
+
+# Création d'un jeu de données final combinant variables catégorielles et numériques
+final_data <- cbind(data_scaled, data %>% select(where(is.character)))
+```
+
+2. Analyse exploratoire
+```{r}
+# Visualisation des distributions
+data %>%
+  ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 5, fill = "blue", alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Distribution de l'âge", x = "Âge", y = "Fréquence")
+
+# Visualisation des relations entre variables (par exemple, âge et heures travaillées)
+ggplot(data, aes(x = hours_per_week, y = age, color = marital_status)) +
+  geom_point(alpha = 0.6) +
+  theme_minimal() +
+  labs(title = "Relation entre heures travaillées et âge", x = "Heures travaillées", y = "Âge")
+
+```
+
+3. ACP (Analyse en Composantes Principales)
+```{r}
+print(data_scaled)
+```
+
+
+```{r}
+# Réalisation de l'ACP
+acp <- prcomp(data_scaled, center = TRUE, scale. = TRUE)
+
+# Visualisation de la variance expliquée
+fviz_eig(acp)
+
+# Projection des individus sur les deux premières composantes
+fviz_pca_ind(acp, col.ind = "cos2", gradient.cols = c("blue", "green", "red"), repel = TRUE)
+
+```
+
+4. Clustering
+```{r}
+# K-means clustering
+set.seed(123)
+kmeans_result <- kmeans(data_scaled, centers = 3, nstart = 25)
+
+# Visualisation des clusters
+fviz_cluster(kmeans_result, data = data_scaled)
+
+# Classification hiérarchique ascendante (CAH)
+dist_matrix <- dist(data_scaled, method = "euclidean")
+cah <- hclust(dist_matrix, method = "ward.D2")
+
+# Dendrogramme
+plot(cah, labels = FALSE, main = "Dendrogramme", sub = "", xlab = "")
+rect.hclust(cah, k = 3, border = "red")
+
+```
+
+5. Analyse des clusters
+```{r}
+# Ajout des clusters aux données originales
+data$cluster <- kmeans_result$cluster
+
+# Caractérisation des clusters
+data %>%
+  group_by(cluster) %>%
+  summarise(
+    age_mean = mean(age, na.rm = TRUE),
+    hours_per_week_mean = mean(hours_per_week, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Visualisation des clusters selon deux variables
+ggplot(data, aes(x = age, y = training_hours, color = factor(cluster))) +
+  geom_point(alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Clusters selon âge et heures de formation", x = "Âge", y = "Heures de formation", color = "Cluster")
+
+```
+AFC avec plusieurs variables qualitatives
+```{r}
+# Sélectionner uniquement les variables qualitatives
+qualitative_data <- final_data %>%
+  select(gender, education_level, marital_status, workclass)
+
+# Vérifier les données
+str(qualitative_data)
+
+# Réaliser une AFC avec FactoMineR
+result_afc_multi <- MCA(qualitative_data, graph = FALSE)
+
+# Visualisation des individus
+fviz_mca_ind(result_afc_multi, repel = TRUE)
+
+# Visualisation des variables
+fviz_mca_var(result_afc_multi, repel = TRUE)
+
+# Visualisation combinée
+fviz_mca_biplot(result_afc_multi, repel = TRUE)
+
+```

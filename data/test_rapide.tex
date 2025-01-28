@@ -1,0 +1,817 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: le package 'tidyverse' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'ggplot2' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'dplyr' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'forcats' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.0
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(cluster)}
+\FunctionTok{library}\NormalTok{(factoextra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: le package 'factoextra' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(FactoMineR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: le package 'FactoMineR' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Préparation des données
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Chargement des données}
+\CommentTok{\# Supposons que les données soient dans un fichier CSV}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"data\_final.csv"}\NormalTok{)}
+
+\CommentTok{\# Gestion des valeurs manquantes}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric), }\SpecialCharTok{\textasciitilde{}} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.), }\FunctionTok{mean}\NormalTok{(., }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), .))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.character), }\SpecialCharTok{\textasciitilde{}} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.), }\StringTok{"Inconnu"}\NormalTok{, .)))}
+
+\CommentTok{\# Normalisation des variables numériques}
+\NormalTok{numeric\_vars }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric))}
+\NormalTok{data\_scaled }\OtherTok{\textless{}{-}} \FunctionTok{scale}\NormalTok{(numeric\_vars)}
+
+\CommentTok{\# Création d\textquotesingle{}un jeu de données final combinant variables catégorielles et numériques}
+\NormalTok{final\_data }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(data\_scaled, data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.character)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Analyse exploratoire
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Visualisation des distributions}
+\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ age)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution de l\textquotesingle{}âge"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Âge"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Fréquence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Visualisation des relations entre variables (par exemple, âge et heures travaillées)}
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ hours\_per\_week, }\AttributeTok{y =}\NormalTok{ age, }\AttributeTok{color =}\NormalTok{ marital\_status)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Relation entre heures travaillées et âge"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Heures travaillées"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Âge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-3-2.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  ACP (Analyse en Composantes Principales)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(data\_scaled)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        city_development_index training_hours         age hours_per_week
+##   [1,]             0.72091704   -0.557543247 -0.41765429     1.36878374
+##   [2,]            -0.63337740   -0.539673271 -0.41765429    -0.10026240
+##   [3,]             0.76170904    0.282345619  0.16698864     0.63426067
+##   [4,]             0.72091704   -0.164403778 -1.44077941    -1.56930854
+##   [5,]             0.76986744    0.836314871 -0.41765429     1.00152221
+##   [6,]             0.72091704    2.676922386  1.04395303     1.00152221
+##   [7,]             0.52511543   -0.253753657  0.24006900    -0.10026240
+##   [8,]             0.72091704   -0.253753657  1.11703339    -0.10026240
+##   [9,]             0.53327383   -0.664763103 -1.22153832    -1.56930854
+##  [10,]            -1.69396944   -0.360973513 -1.51385978    -2.30383161
+##  [11,]             0.72091704   -0.200143730 -1.36769905    -1.20204701
+##  [12,]             0.72091704    0.818444895 -0.12533283     1.73604528
+##  [13,]             0.63933304   -0.986422668 -1.29461868    -0.83478547
+##  [14,]             0.72091704   -0.414583440  0.38622973     1.36878374
+##  [15,]            -0.30704139    0.246605667 -1.36769905    -1.20204701
+##  [16,]            -1.69396944   -0.521803296 -0.56381502    -0.10026240
+##  [17,]            -1.69396944   -0.325233561  0.45931010     0.63426067
+##  [18,]            -1.16367342    0.139385812  2.72480144    -1.12859470
+##  [19,]             0.45168983   -0.396713464  0.67855120    -0.10026240
+##  [20,]            -1.69396944    0.764834967  0.09390827     0.63426067
+##  [21,]            -1.69396944   -0.879202813 -0.19841319    -0.10026240
+##  [22,]            -1.69396944   -0.789852934  1.99399778    -1.93657008
+##  [23,]             0.45168983   -0.057183923 -1.14845795    -0.10026240
+##  [24,]             0.63933304   -0.771982958  1.77475669    -0.10026240
+##  [25,]            -1.69396944   -0.057183923 -1.00229722    -1.56930854
+##  [26,]             0.72091704   -0.307363585  1.19011376     0.63426067
+##  [27,]            -1.69396944   -0.378843489 -0.19841319     0.26699914
+##  [28,]             0.53327383   -0.789852934 -1.07537758    -1.20204701
+##  [29,]             0.87592664   -0.950682717 -0.56381502    -2.45073623
+##  [30,]             0.72091704   -0.092923875 -1.00229722    -0.10026240
+##  [31,]            -1.35131663   -0.718373030  0.09390827     0.26699914
+##  [32,]            -0.53547660    0.496785329 -1.14845795     1.36878374
+##  [33,]             0.42721463   -0.968552692 -0.19841319    -0.83478547
+##  [34,]            -1.69396944   -0.843462861  0.75163156     0.63426067
+##  [35,]             0.63933304    0.854184847 -1.36769905    -0.10026240
+##  [36,]             0.63933304   -0.879202813 -0.49073466    -0.10026240
+##  [37,]             0.42721463   -0.503933320 -0.92921685    -0.10026240
+##  [38,]             0.63933304   -0.521803296 -0.41765429     3.13163911
+##  [39,]             0.75355064    1.390284123 -0.27149356    -0.10026240
+##  [40,]             0.72091704    1.854903496 -0.78305612     1.00152221
+##  [41,]            -1.69396944    0.407435450  1.48243522    -0.10026240
+##  [42,]             0.72091704   -0.450323392  0.67855120     0.78116529
+##  [43,]             0.76986744   -0.932812741 -0.49073466    -0.10026240
+##  [44,]             0.72091704   -0.593283199 -1.07537758    -0.10026240
+##  [45,]             0.66380824    0.782704943  0.02082790    -0.10026240
+##  [46,]             0.63933304   -0.950682717 -0.85613649    -0.10026240
+##  [47,]             0.63933304   -0.378843489 -1.29461868    -2.30383161
+##  [48,]            -0.22545739   -0.611153175 -0.34457393    -0.10026240
+##  [49,]            -1.69396944    2.641182434  1.33627449    -0.10026240
+##  [50,]             0.51695703    1.032884606  0.38622973    -0.10026240
+##  [51,]             0.53327383   -0.360973513 -0.19841319    -0.10026240
+##  [52,]            -1.09024782   -0.771982958 -0.49073466    -0.10026240
+##  [53,]             0.76986744   -0.593283199  0.97087266    -0.10026240
+##  [54,]             0.95751065   -0.575413223  0.45931010     0.26699914
+##  [55,]             0.87592664    4.213740311  0.60547083    -0.24716701
+##  [56,]             0.53327383   -0.718373030 -0.78305612    -0.10026240
+##  [57,]             0.72091704    0.175125764 -0.56381502     0.48735606
+##  [58,]            -1.69396944   -0.754112982 -1.29461868    -0.10026240
+##  [59,]             0.87592664   -0.307363585  0.97087266     0.26699914
+##  [60,]            -0.63337740   -0.771982958 -1.44077941    -1.56930854
+##  [61,]            -1.09024782   -0.700503054  0.82471193    -0.10026240
+##  [62,]             0.72091704   -0.289493609 -0.78305612     2.10330681
+##  [63,]             0.76986744    0.729095016  0.38622973    -1.20204701
+##  [64,]            -0.22545739    0.443175402  1.48243522     0.26699914
+##  [65,]            -0.86997101   -0.968552692 -1.36769905    -0.10026240
+##  [66,]            -1.14735662   -1.075772548  0.60547083     2.83782989
+##  [67,]             0.72091704    0.121515836  1.19011376    -0.24716701
+##  [68,]             0.63933304   -0.253753657 -0.19841319    -0.68788086
+##  [69,]            -1.69396944   -0.879202813 -1.51385978    -2.30383161
+##  [70,]             0.72091704    1.104364509  1.48243522    -0.46752393
+##  [71,]            -1.69396944   -0.200143730 -1.29461868    -1.27549931
+##  [72,]             0.63933304    0.210865715  0.82471193    -0.10026240
+##  [73,]             0.72091704   -0.432453416 -0.27149356    -0.10026240
+##  [74,]            -2.06109745   -0.468193368  1.04395303    -0.10026240
+##  [75,]             0.72091704   -0.575413223  0.31314937     0.26699914
+##  [76,]             0.63933304   -0.128663826 -1.29461868    -0.10026240
+##  [77,]             0.63933304    0.872054823  0.97087266    -0.83478547
+##  [78,]             0.45168983   -0.057183923 -1.36769905     1.36878374
+##  [79,]             0.72091704   -0.003573995  0.75163156     0.63426067
+##  [80,]             0.72091704    2.033603255  0.82471193     1.00152221
+##  [81,]             0.50064023   -1.057902572 -0.56381502     0.26699914
+##  [82,]            -3.12984788    0.389565474  1.04395303    -0.10026240
+##  [83,]             0.72091704   -0.736243006 -0.12533283     0.63426067
+##  [84,]             0.72091704    0.246605667 -0.41765429    -1.27549931
+##  [85,]            -0.35599179    1.104364509  0.02082790     2.10330681
+##  [86,]             0.76170904   -1.075772548  2.14015851    -0.10026240
+##  [87,]             0.76986744   -0.825592885  0.60547083     0.63426067
+##  [88,]             0.72091704   -0.378843489  0.82471193     0.63426067
+##  [89,]             0.47616503   -0.557543247  0.02082790     0.63426067
+##  [90,]             0.76986744    0.157255788 -0.78305612     0.04664222
+##  [91,]             0.87592664    0.639745136  1.19011376     1.36878374
+##  [92,]             0.72091704   -0.807722910  2.06707815     0.63426067
+##  [93,]             0.87592664   -0.646893127  0.24006900    -0.24716701
+##  [94,]             0.06824502   -1.040032596 -0.41765429     0.48735606
+##  [95,]             0.72091704   -0.718373030 -0.05225246    -0.46752393
+##  [96,]            -0.74759501   -0.575413223  0.75163156    -0.10026240
+##  [97,]            -0.63337740    1.658333761 -0.12533283    -0.10026240
+##  [98,]            -1.69396944    1.265194292  2.14015851    -1.56930854
+##  [99,]             0.54959063    2.033603255  0.82471193    -0.10026240
+## [100,]             0.72091704   -1.040032596  0.09390827     0.63426067
+## [101,]             0.76986744   -0.914942765  0.89779229    -0.10026240
+## [102,]            -2.48533426   -1.093642524 -0.63689539    -0.10026240
+## [103,]            -1.69396944   -0.879202813 -0.41765429     0.92806990
+## [104,]             0.87592664   -0.075053899  0.09390827     0.26699914
+## [105,]             0.72091704    1.890643448  0.24006900    -0.10026240
+## [106,]             0.72091704   -0.611153175 -1.36769905    -1.20204701
+## [107,]            -1.69396944    0.282345619 -0.78305612    -0.10026240
+## [108,]            -1.69396944   -1.075772548 -1.29461868    -2.15692700
+## [109,]            -0.03781419   -0.611153175 -0.85613649     1.00152221
+## [110,]             0.45168983    1.854903496  0.97087266     0.63426067
+## [111,]             0.72091704    0.032165957 -0.92921685    -0.10026240
+## [112,]             0.72091704   -1.040032596  0.75163156     1.36878374
+## [113,]            -0.29072459    0.389565474 -0.41765429     0.63426067
+## [114,]             0.72091704    1.747683641  2.14015851    -0.10026240
+## [115,]             0.72091704    0.335955546  0.97087266     2.10330681
+## [116,]            -1.69396944    2.498222627  0.97087266    -0.10026240
+## [117,]             0.76986744    1.497503978 -0.56381502     2.83782989
+## [118,]             0.76986744   -0.253753657 -0.49073466    -0.10026240
+## [119,]             0.72091704    0.139385812 -1.14845795     0.63426067
+## [120,]             0.72091704    2.855622145  0.60547083    -0.10026240
+## [121,]            -2.48533426   -0.164403778 -0.85613649    -0.46752393
+## [122,]            -0.01333898   -0.432453416  0.67855120     0.63426067
+## [123,]            -1.69396944    0.478915353  1.26319412     4.23342372
+## [124,]             0.72091704   -0.843462861 -0.12533283     0.26699914
+## [125,]             0.72091704   -0.789852934 -1.36769905     0.78116529
+## [126,]             0.72091704   -0.128663826  1.99399778    -1.93657008
+## [127,]             0.87592664    1.729813665 -0.34457393     0.34045144
+## [128,]             0.72091704   -0.682633078 -0.19841319    -0.10026240
+## [129,]             0.72091704   -0.200143730 -0.78305612    -0.10026240
+## [130,]            -2.48533426   -0.807722910  0.38622973     0.26699914
+## [131,]            -1.35131663    1.711943689 -1.44077941    -1.56930854
+## [132,]             0.87592664    0.746964992  0.89779229    -0.10026240
+## [133,]            -1.22078222   -0.718373030 -0.63689539    -0.10026240
+## [134,]             0.72091704   -1.040032596  0.75163156    -0.68788086
+## [135,]            -1.22078222    2.855622145 -1.00229722    -0.10026240
+## [136,]             0.72091704   -0.539673271 -0.78305612     2.10330681
+## [137,]             0.19062102   -1.022162620 -0.05225246    -0.68788086
+## [138,]             0.72091704   -0.360973513 -1.51385978    -0.10026240
+## [139,]             0.72091704    1.604723834  0.45931010    -0.10026240
+## [140,]             0.72091704    2.784142241  0.75163156    -0.10026240
+## [141,]             0.53327383   -0.718373030 -1.07537758    -0.10026240
+## [142,]            -0.74759501   -0.360973513  1.92091742    -2.45073623
+## [143,]            -0.72311981   -0.325233561 -1.07537758    -0.10026240
+## [144,]            -1.09024782   -0.253753657  0.02082790    -0.10026240
+## [145,]             0.52511543   -0.646893127 -0.78305612     0.34045144
+## [146,]             0.74539224   -0.897072789  0.53239047    -0.10026240
+## [147,]             0.72091704    0.318085571 -0.12533283    -0.46752393
+## [148,]             0.53327383   -0.771982958 -1.44077941    -1.56930854
+## [149,]            -0.72311981   -1.004292644  1.33627449     0.63426067
+## [150,]             0.45168983    0.264475643  0.24006900     1.36878374
+## [151,]            -1.22078222   -0.235883682  0.45931010    -1.20204701
+## [152,]             0.72091704    0.353825522  0.31314937    -0.10026240
+## [153,]             0.76170904   -0.521803296 -1.14845795    -0.10026240
+## [154,]            -1.69396944    3.570421180 -1.00229722     0.26699914
+## [155,]            -1.69396944    0.371695498  0.31314937     0.26699914
+## [156,]             0.76986744    0.050035932  0.75163156    -0.10026240
+## [157,]            -0.52731820    1.962123351 -0.49073466     0.26699914
+## [158,]             0.53327383   -0.593283199  0.38622973    -1.56930854
+## [159,]             0.76986744   -1.022162620 -0.19841319    -0.83478547
+## [160,]             0.72091704    0.032165957 -0.41765429    -0.10026240
+## [161,]            -1.69396944   -0.253753657 -0.63689539     0.48735606
+## [162,]             0.19062102   -0.164403778 -1.29461868    -1.56930854
+## [163,]            -1.14735662   -0.075053899  0.89779229    -0.10026240
+## [164,]             0.72091704   -0.164403778 -0.27149356    -0.46752393
+## [165,]             0.63933304   -0.629023151  1.40935486    -0.10026240
+## [166,]            -1.09024782   -0.253753657  0.45931010    -0.10026240
+## [167,]            -1.69396944   -0.771982958  0.02082790    -0.10026240
+## [168,]             0.63933304    0.854184847  0.60547083     0.63426067
+## [169,]            -0.22545739   -0.378843489  0.89779229     0.26699914
+## [170,]            -2.23242385    1.372414147 -1.22153832    -0.46752393
+## [171,]             0.75355064    0.139385812 -0.56381502    -0.10026240
+## [172,]            -1.09024782   -0.718373030 -1.00229722    -0.83478547
+## [173,]            -1.69396944   -0.539673271  0.89779229     2.10330681
+## [174,]             0.76986744   -0.575413223 -0.85613649    -1.56930854
+## [175,]            -0.46205100    0.782704943  0.75163156    -0.10026240
+## [176,]            -0.03781419   -0.271623633 -1.22153832    -0.10026240
+## [177,]            -0.53547660   -0.611153175  3.16328364     0.63426067
+## [178,]             0.72907544    2.426742724 -1.14845795    -0.10026240
+## [179,]            -1.69396944    1.050754581 -0.92921685    -0.10026240
+## [180,]             0.72091704    0.461045378  0.45931010    -0.10026240
+## [181,]            -0.52731820   -0.593283199 -0.70997575    -0.10026240
+## [182,]             0.63933304   -0.843462861 -0.19841319     0.26699914
+## [183,]             0.53327383   -0.396713464  0.31314937    -0.10026240
+## [184,]            -0.63337740   -0.950682717 -0.12533283    -0.10026240
+## [185,]             0.72091704   -0.486063344  1.48243522    -0.10026240
+## [186,]             0.87592664   -0.414583440 -0.12533283    -0.10026240
+## [187,]             0.45168983    0.246605667 -1.51385978    -1.93657008
+## [188,]             0.72091704    0.478915353  2.50556034    -1.56930854
+## [189,]            -1.09024782   -0.253753657 -0.41765429     1.36878374
+## [190,]             0.76986744    0.085775884 -0.19841319    -0.10026240
+## [191,]             0.72091704    1.068624557  0.38622973    -0.10026240
+## [192,]            -0.63337740   -0.736243006  0.53239047     2.10330681
+## [193,]             0.53327383    0.246605667  1.40935486     0.78116529
+## [194,]             0.63933304   -0.754112982  1.70167632    -0.10026240
+## [195,]             0.45168983   -0.503933320 -0.92921685    -0.10026240
+## [196,]             0.63933304   -1.022162620 -1.36769905    -0.10026240
+## [197,]             0.76986744   -0.771982958  0.53239047     1.36878374
+## [198,]             0.53327383    1.640463785  1.33627449    -0.10026240
+## [199,]            -0.22545739   -0.897072789 -0.78305612    -0.10026240
+## [200,]             0.63933304   -0.754112982 -1.51385978    -0.10026240
+##            target
+##   [1,] -0.5759051
+##   [2,] -0.5759051
+##   [3,] -0.5759051
+##   [4,] -0.5759051
+##   [5,] -0.5759051
+##   [6,] -0.5759051
+##   [7,] -0.5759051
+##   [8,] -0.5759051
+##   [9,] -0.5759051
+##  [10,]  1.7277153
+##  [11,] -0.5759051
+##  [12,] -0.5759051
+##  [13,] -0.5759051
+##  [14,] -0.5759051
+##  [15,] -0.5759051
+##  [16,] -0.5759051
+##  [17,]  1.7277153
+##  [18,] -0.5759051
+##  [19,] -0.5759051
+##  [20,] -0.5759051
+##  [21,] -0.5759051
+##  [22,] -0.5759051
+##  [23,] -0.5759051
+##  [24,] -0.5759051
+##  [25,] -0.5759051
+##  [26,] -0.5759051
+##  [27,] -0.5759051
+##  [28,]  1.7277153
+##  [29,] -0.5759051
+##  [30,]  1.7277153
+##  [31,] -0.5759051
+##  [32,]  1.7277153
+##  [33,]  1.7277153
+##  [34,] -0.5759051
+##  [35,] -0.5759051
+##  [36,] -0.5759051
+##  [37,]  1.7277153
+##  [38,] -0.5759051
+##  [39,] -0.5759051
+##  [40,] -0.5759051
+##  [41,]  1.7277153
+##  [42,] -0.5759051
+##  [43,] -0.5759051
+##  [44,]  1.7277153
+##  [45,] -0.5759051
+##  [46,] -0.5759051
+##  [47,]  1.7277153
+##  [48,] -0.5759051
+##  [49,]  1.7277153
+##  [50,] -0.5759051
+##  [51,] -0.5759051
+##  [52,] -0.5759051
+##  [53,] -0.5759051
+##  [54,] -0.5759051
+##  [55,] -0.5759051
+##  [56,] -0.5759051
+##  [57,]  1.7277153
+##  [58,] -0.5759051
+##  [59,] -0.5759051
+##  [60,] -0.5759051
+##  [61,]  1.7277153
+##  [62,]  1.7277153
+##  [63,]  1.7277153
+##  [64,]  1.7277153
+##  [65,]  1.7277153
+##  [66,] -0.5759051
+##  [67,] -0.5759051
+##  [68,] -0.5759051
+##  [69,]  1.7277153
+##  [70,] -0.5759051
+##  [71,] -0.5759051
+##  [72,] -0.5759051
+##  [73,] -0.5759051
+##  [74,] -0.5759051
+##  [75,]  1.7277153
+##  [76,] -0.5759051
+##  [77,] -0.5759051
+##  [78,] -0.5759051
+##  [79,] -0.5759051
+##  [80,] -0.5759051
+##  [81,] -0.5759051
+##  [82,]  1.7277153
+##  [83,]  1.7277153
+##  [84,] -0.5759051
+##  [85,] -0.5759051
+##  [86,] -0.5759051
+##  [87,] -0.5759051
+##  [88,] -0.5759051
+##  [89,] -0.5759051
+##  [90,] -0.5759051
+##  [91,] -0.5759051
+##  [92,]  1.7277153
+##  [93,] -0.5759051
+##  [94,] -0.5759051
+##  [95,] -0.5759051
+##  [96,] -0.5759051
+##  [97,] -0.5759051
+##  [98,] -0.5759051
+##  [99,] -0.5759051
+## [100,]  1.7277153
+## [101,] -0.5759051
+## [102,] -0.5759051
+## [103,]  1.7277153
+## [104,] -0.5759051
+## [105,] -0.5759051
+## [106,]  1.7277153
+## [107,] -0.5759051
+## [108,] -0.5759051
+## [109,]  1.7277153
+## [110,]  1.7277153
+## [111,] -0.5759051
+## [112,] -0.5759051
+## [113,] -0.5759051
+## [114,] -0.5759051
+## [115,] -0.5759051
+## [116,]  1.7277153
+## [117,] -0.5759051
+## [118,] -0.5759051
+## [119,] -0.5759051
+## [120,] -0.5759051
+## [121,] -0.5759051
+## [122,] -0.5759051
+## [123,]  1.7277153
+## [124,] -0.5759051
+## [125,] -0.5759051
+## [126,] -0.5759051
+## [127,] -0.5759051
+## [128,]  1.7277153
+## [129,] -0.5759051
+## [130,]  1.7277153
+## [131,] -0.5759051
+## [132,] -0.5759051
+## [133,]  1.7277153
+## [134,] -0.5759051
+## [135,] -0.5759051
+## [136,] -0.5759051
+## [137,] -0.5759051
+## [138,] -0.5759051
+## [139,] -0.5759051
+## [140,] -0.5759051
+## [141,] -0.5759051
+## [142,] -0.5759051
+## [143,] -0.5759051
+## [144,]  1.7277153
+## [145,] -0.5759051
+## [146,] -0.5759051
+## [147,] -0.5759051
+## [148,] -0.5759051
+## [149,] -0.5759051
+## [150,] -0.5759051
+## [151,] -0.5759051
+## [152,] -0.5759051
+## [153,] -0.5759051
+## [154,]  1.7277153
+## [155,] -0.5759051
+## [156,] -0.5759051
+## [157,] -0.5759051
+## [158,] -0.5759051
+## [159,]  1.7277153
+## [160,] -0.5759051
+## [161,]  1.7277153
+## [162,]  1.7277153
+## [163,]  1.7277153
+## [164,] -0.5759051
+## [165,]  1.7277153
+## [166,] -0.5759051
+## [167,]  1.7277153
+## [168,]  1.7277153
+## [169,] -0.5759051
+## [170,] -0.5759051
+## [171,] -0.5759051
+## [172,]  1.7277153
+## [173,] -0.5759051
+## [174,]  1.7277153
+## [175,] -0.5759051
+## [176,]  1.7277153
+## [177,]  1.7277153
+## [178,] -0.5759051
+## [179,]  1.7277153
+## [180,] -0.5759051
+## [181,] -0.5759051
+## [182,] -0.5759051
+## [183,] -0.5759051
+## [184,]  1.7277153
+## [185,] -0.5759051
+## [186,] -0.5759051
+## [187,] -0.5759051
+## [188,] -0.5759051
+## [189,]  1.7277153
+## [190,] -0.5759051
+## [191,] -0.5759051
+## [192,] -0.5759051
+## [193,]  1.7277153
+## [194,] -0.5759051
+## [195,] -0.5759051
+## [196,] -0.5759051
+## [197,]  1.7277153
+## [198,] -0.5759051
+## [199,] -0.5759051
+## [200,] -0.5759051
+## attr(,"scaled:center")
+## city_development_index         training_hours                    age 
+##               0.831635              64.200000              37.715000 
+##         hours_per_week                 target 
+##              41.365000               0.250000 
+## attr(,"scaled:scale")
+## city_development_index         training_hours                    age 
+##              0.1225730             55.9597846             13.6835659 
+##         hours_per_week                 target 
+##             13.6142762              0.4340993
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Réalisation de l\textquotesingle{}ACP}
+\NormalTok{acp }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(data\_scaled, }\AttributeTok{center =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{scale. =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Visualisation de la variance expliquée}
+\FunctionTok{fviz\_eig}\NormalTok{(acp)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Projection des individus sur les deux premières composantes}
+\FunctionTok{fviz\_pca\_ind}\NormalTok{(acp, }\AttributeTok{col.ind =} \StringTok{"cos2"}\NormalTok{, }\AttributeTok{gradient.cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }\AttributeTok{repel =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-5-2.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Clustering
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# K{-}means clustering}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{kmeans\_result }\OtherTok{\textless{}{-}} \FunctionTok{kmeans}\NormalTok{(data\_scaled, }\AttributeTok{centers =} \DecValTok{3}\NormalTok{, }\AttributeTok{nstart =} \DecValTok{25}\NormalTok{)}
+
+\CommentTok{\# Visualisation des clusters}
+\FunctionTok{fviz\_cluster}\NormalTok{(kmeans\_result, }\AttributeTok{data =}\NormalTok{ data\_scaled)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Classification hiérarchique ascendante (CAH)}
+\NormalTok{dist\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{dist}\NormalTok{(data\_scaled, }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+\NormalTok{cah }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(dist\_matrix, }\AttributeTok{method =} \StringTok{"ward.D2"}\NormalTok{)}
+
+\CommentTok{\# Dendrogramme}
+\FunctionTok{plot}\NormalTok{(cah, }\AttributeTok{labels =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{"Dendrogramme"}\NormalTok{, }\AttributeTok{sub =} \StringTok{""}\NormalTok{, }\AttributeTok{xlab =} \StringTok{""}\NormalTok{)}
+\FunctionTok{rect.hclust}\NormalTok{(cah, }\AttributeTok{k =} \DecValTok{3}\NormalTok{, }\AttributeTok{border =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-6-2.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Analyse des clusters
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Ajout des clusters aux données originales}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{cluster }\OtherTok{\textless{}{-}}\NormalTok{ kmeans\_result}\SpecialCharTok{$}\NormalTok{cluster}
+
+\CommentTok{\# Caractérisation des clusters}
+\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(cluster) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{age\_mean =} \FunctionTok{mean}\NormalTok{(age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{hours\_per\_week\_mean =} \FunctionTok{mean}\NormalTok{(hours\_per\_week, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{.groups =} \StringTok{"drop"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 3
+##   cluster age_mean hours_per_week_mean
+##     <int>    <dbl>               <dbl>
+## 1       1     36.2                40.5
+## 2       2     43.8                43.6
+## 3       3     36.3                41.7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Visualisation des clusters selon deux variables}
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ age, }\AttributeTok{y =}\NormalTok{ training\_hours, }\AttributeTok{color =} \FunctionTok{factor}\NormalTok{(cluster))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Clusters selon âge et heures de formation"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Âge"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Heures de formation"}\NormalTok{, }\AttributeTok{color =} \StringTok{"Cluster"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-7-1.pdf}
+AFC avec plusieurs variables qualitatives
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sélectionner uniquement les variables qualitatives}
+\NormalTok{qualitative\_data }\OtherTok{\textless{}{-}}\NormalTok{ final\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(gender, education\_level, marital\_status, workclass)}
+
+\CommentTok{\# Vérifier les données}
+\FunctionTok{str}\NormalTok{(qualitative\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    200 obs. of  4 variables:
+##  $ gender         : chr  "Male" "Male" "" "Male" ...
+##  $ education_level: chr  "" "Graduate" "Graduate" "Graduate" ...
+##  $ marital_status : chr  " Married-civ-spouse" " Married-civ-spouse" " Divorced" " Never-married" ...
+##  $ workclass      : chr  " Private" " Private" " Private" " Private" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Réaliser une AFC avec FactoMineR}
+\NormalTok{result\_afc\_multi }\OtherTok{\textless{}{-}} \FunctionTok{MCA}\NormalTok{(qualitative\_data, }\AttributeTok{graph =} \ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\# Visualisation des individus}
+\FunctionTok{fviz\_mca\_ind}\NormalTok{(result\_afc\_multi, }\AttributeTok{repel =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Visualisation des variables}
+\FunctionTok{fviz\_mca\_var}\NormalTok{(result\_afc\_multi, }\AttributeTok{repel =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Visualisation combinée}
+\FunctionTok{fviz\_mca\_biplot}\NormalTok{(result\_afc\_multi, }\AttributeTok{repel =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_rapide_files/figure-latex/unnamed-chunk-8-3.pdf}
+
+\end{document}
